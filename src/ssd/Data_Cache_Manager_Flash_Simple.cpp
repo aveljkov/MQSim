@@ -14,8 +14,8 @@ namespace SSD_Components
 		: Data_Cache_Manager_Base(id, host_interface, firmware, dram_row_size, dram_data_rate, dram_busrt_size, dram_tRCD, dram_tCL, dram_tRP, caching_mode_per_input_stream, Cache_Sharing_Mode::SHARED, stream_count),
 		flash_controller(flash_controller), capacity_in_bytes(total_capacity_in_bytes), sector_no_per_page(sector_no_per_page),	request_queue_turn(0), back_pressure_buffer_max_depth(back_pressure_buffer_max_depth)
 	{
-		capacity_in_pages = capacity_in_bytes / (SECTOR_SIZE_IN_BYTE * sector_no_per_page);
-		data_cache = new Data_Cache_Flash(capacity_in_pages);
+		capacity_in_pages = capacity_in_bytes / (SECTOR_SIZE_IN_BYTE * sector_no_per_page);     //$ PERSONAL NOTE
+		data_cache = new Data_Cache_Flash(capacity_in_pages);                                   //$ PERSONAL NOTE: this is probably the cache to work on 
 		dram_execution_queue = new std::queue<Memory_Transfer_Info*>[stream_count];
 		waiting_user_requests_queue_for_dram_free_slot = new std::list<User_Request*>[stream_count];
 		this->back_pressure_buffer_depth = 0;
@@ -320,4 +320,32 @@ namespace SSD_Components
 
 		delete transfer_inf;
 	}
+
+
+
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//                                                                           NEW CODE BEGIN                                                                                    //
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	/* Ideas:
+	 * 	 - could pass threshold arguments for when repartitioning should take place
+	 *   - could pass an argument on how strict/ tight the repartitioning should be 
+	 *   - make a function in Data_Cache_flash which does the actual repartitioning and this just checks
+	 */
+	void Data_Cache_Manager_Flash_Simple::Repartition()
+	{
+		/* 
+		 *  Call on Data_Cache_Flash::Check_free_slot_availability(unsigned int no_of_slots) and decide, depending on a threshold value, whether to increase or decrease 
+		 *  the value of Data_Cache_Flash::capacity_in_pages
+	     */
+
+		// when reparititioning should take place, consult Data_Cache_Flash::State_bitmap_of_existing_sectors
+	}
+
+
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//                                                                           NEW CODE END                                                                                      //
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 }
