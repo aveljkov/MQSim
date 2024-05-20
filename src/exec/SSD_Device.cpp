@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include <vector>
 #include <stdexcept>
 #include <ctime>
@@ -461,3 +463,16 @@ page_status_type SSD_Device::Find_NVM_subunit_access_bitmap(LHA_type lha)
 {
 	return my_instance->Firmware->Find_NVM_subunit_access_bitmap(lha);
 }
+
+
+//////////////////////////////////// NEW CODE /////////////////////////////////////////////////
+void SSD_Device::repartition()
+{
+	// int data_cache_capacity;
+
+	// data_cache_capacity = my_instance->Cache_manager->data_cache;
+
+	// std::cout << data_cache_capacity;
+
+}
+///////////////////////////////////////////////////////////////////////////////////////////////

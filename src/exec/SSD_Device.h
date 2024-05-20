@@ -48,9 +48,15 @@ public:
 	void Execute_simulator_event(MQSimEngine::Sim_Event* event);
 	static LPA_type Convert_host_logical_address_to_device_address(LHA_type lha);
 	static page_status_type Find_NVM_subunit_access_bitmap(LHA_type lha);
+	////////// new code ////////////
+	void repartition();
+	////////////////////////////////
 
 	unsigned int Channel_count;
 	unsigned int Chip_no_per_channel;
+	////////// new code ////////////
+	unsigned int Shared_mem_pool;
+	////////////////////////////////
 
 private:
 	static SSD_Device * my_instance;//Used in static functions

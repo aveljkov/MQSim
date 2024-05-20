@@ -187,3 +187,10 @@ std::vector<Utils::Workload_Statistics*> Host_System::get_workloads_statistics()
 	return stats;
 }
 
+///////////////////////////////////////// new code //////////////////////////
+void Host_System::reparition()
+{
+	// int capacity;
+	// capacity = this->ssd_device->Cache_manager->data_cache;
+}
+/////////////////////////////////////////////////////////////////////////////
